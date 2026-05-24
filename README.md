@@ -8,3 +8,4 @@ Some of my favorite projects are:
 3. Chess Engine(This project was really fun to make, as I trained a model using reinforcment learning to play chess, and I made it so that it can play against the user and itself)(still a work in progress, im still working on its its 10% done)
 4. Doorbell(This project lets you scan San Jose for affordable houses using redfin data, and it shows you the adresses and lets you search for them using factors such as bedrooms, bathrooms, sqft, ect. I used leaflet, redfine dataa, ajax, and flask backend)
 5. Fetchbot(This project was really fun to make, and it is one of my best robotics projects. It uses both a raspberry pi and arduino, and it has a robot hand and wheels.)
+I also do alot of small python projects around pygame, and I have made some java utility projects, such as a csv file cleaner and a library app.
