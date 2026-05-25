@@ -10,3 +10,5 @@ Some of my favorite projects are:
 5. Fetchbot(This project was really fun to make, and it is one of my best robotics projects. It uses both a raspberry pi and arduino, and it has a robot hand and wheels.)
 # Other things i do
 I also do alot of small python projects around pygame, and I have made some java utility projects, such as a csv file cleaner and a library app.
+# Game Dev
+I also do some gamedev, aside from AGAR.io, such as making a bullet hell game in pygame. I also used to do godot, and I also do some unity.
