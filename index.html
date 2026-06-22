@@ -1,195 +1,216 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impossible Password Checker</title>
+<meta charset="UTF-8">
+<title>Robosword Codes</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            background: #111;
-            color: white;
-            font-family: 'Open Sans', sans-serif;
-            overflow: hidden;
-        }
+<style>
+body {
+    background: #1c1c1c;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
-        .passwordScreen {
-            position: fixed;
-            inset: 0;
-            background: linear-gradient(135deg, #111, #1f1f1f);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+/* NAVBAR (unchanged) */
+.Navbar {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(90deg, #111111, #1f1f1f);
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    border-bottom: 2px solid #FFAB40;
+    color: white;
+}
 
-        .passwordBox {
-            width: 550px;
-            background: #222;
-            border: 2px solid #FFAB40;
-            border-radius: 30px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(255,171,64,0.3);
-        }
+.Navbar img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+}
 
-        .passwordBox h1 {
-            color: #FFAB40;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 38px;
-            margin-bottom: 20px;
-        }
+.Navbar h1 {
+    color: #FFAB40;
+    font-size: 28px;
+    font-family: 'Orbitron';
+}
 
-        .passwordBox input {
-            width: 80%;
-            padding: 15px;
-            font-size: 18px;
-            border-radius: 15px;
-            border: none;
-            outline: none;
-            background: #333;
-            color: white;
-        }
+.navbuttons {
+    margin-left: auto;
+    margin-right: 50px;
+}
 
-        .passwordBox button {
-            margin-top: 20px;
-            padding: 12px 25px;
-            font-size: 18px;
-            border: none;
-            border-radius: 20px;
-            background: #FFAB40;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
+.navbuttons a {
+    color: #FFAB40;
+    text-decoration: none;
+    margin-left: 15px;
+}
 
-        .passwordBox button:hover {
-            transform: scale(1.05);
-        }
+/* PASSWORD SCREEN */
+.passwordScreen {
+    position: fixed;
+    inset: 0;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
-        .requirements {
-            margin-top: 25px;
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 20px;
-            max-height: 250px;
-            overflow-y: auto;
-            text-align: left;
-        }
+.passwordBox {
+    width: 550px;
+    background: #222;
+    border: 2px solid #FFAB40;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+}
 
-        .requirements p {
-            color: #ff6b6b;
-            margin: 10px 0;
-            font-size: 15px;
-        }
+.passwordBox h1 {
+    color: #FFAB40;
+    font-family: 'Orbitron';
+}
 
-        .loadingScreen {
-            position: fixed;
-            inset: 0;
-            background: black;
-            color: #00ff00;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-family: monospace;
-            z-index: 9999;
-        }
+.passwordBox input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+    font-size: 18px;
+}
 
-        .loadingScreen h1 {
-            font-size: 50px;
-            margin-bottom: 30px;
-        }
+.passwordBox button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #FFAB40;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        .loadingBar {
-            width: 450px;
-            height: 30px;
-            border: 2px solid #00ff00;
-        }
+/* REQUIREMENTS */
+.requirements {
+    margin-top: 20px;
+    background: #111;
+    padding: 15px;
+    border-radius: 15px;
+    max-height: 220px;
+    overflow-y: auto;
+    text-align: left;
+}
 
-        .loadingFill {
-            width: 0%;
-            height: 100%;
-            background: #00ff00;
-            transition: width 3s linear;
-        }
+.requirements p {
+    color: #ff6b6b;
+    margin: 6px 0;
+}
 
-        .finalText {
-            font-size: 50px;
-            color: #00ff00;
-            text-shadow: 0 0 10px #00ff00;
-            animation: flicker 1s infinite alternate;
-        }
+/* LOADING SCREEN */
+.loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    color: #00ff00;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: monospace;
+    z-index: 10000;
+}
 
-        @keyframes flicker {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0.7;
-            }
-        }
-    </style>
+.loadingBar {
+    width: 400px;
+    height: 25px;
+    border: 2px solid #00ff00;
+    margin-top: 20px;
+}
+
+.loadingFill {
+    width: 0%;
+    height: 100%;
+    background: #00ff00;
+    transition: width 3s linear;
+}
+</style>
 </head>
 
 <body>
 
+<div class="Navbar">
+    <img src="profilePic.png">
+    <h1>Robosword Codes</h1>
+    <div class="navbuttons">
+        <a href="projects.html">projects</a>
+        <a href="index.html">posts</a>
+    </div>
+</div>
+
+<!-- PASSWORD SCREEN -->
 <div class="passwordScreen" id="passwordScreen">
 
     <div class="passwordBox">
 
-        <h1>PASSWORD TO ROBOSWORD's BLOG</h1>
+        <h1>SECURE LOGIN SYSTEM v0.0.1</h1>
 
-        <input type="text" id="passwordInput" placeholder="Enter password...">
+        <input id="passwordInput" type="text" placeholder="Enter password...">
 
         <br>
 
-        <button onclick="checkPassword()">Submit Password</button>
+        <button onclick="checkPassword()">Submit</button>
 
         <div class="requirements" id="requirements">
-            <p>❌ Must contain a capital letter</p>
+            <p>❌ System initializing security modules...</p>
         </div>
 
     </div>
 
 </div>
 
+<!-- LOADING -->
 <div class="loadingScreen" id="loadingScreen">
-
     <h1>PASSWORD ACCEPTED</h1>
-
     <div class="loadingBar">
         <div class="loadingFill" id="loadingFill"></div>
     </div>
-
 </div>
 
 <script>
 
 const requirements = [
+    "❌ Password must contain at least 1 uppercase letter",
+    "❌ Password must include a number (1–9)",
+    "❌ Password must include a valid symbol (!, @, #, $)",
+    "❌ System note: suspicious character detected in input stream",
+    "❌ Password entropy too low",
+    "❌ Password entropy too high",
+    "❌ Must contain a reference to a known entity",
+    "❌ Must avoid referencing unknown entities",
+    "❌ Input pattern mismatch: expected format A?B?C?",
+    "❌ Character set violation detected",
+    "❌ Security heuristic triggered",
+    "❌ Numeric anomaly detected near value 3",
+    "❌ Symbol stability check failed",
+    "❌ Password does not feel “correct”",
+    "❌ AI confidence: unstable",
+    "❌ Final rule: unknown condition required"
+];
 
-    "❌ Must contain a number",
-    "❌ Must contain a special character",
-    "❌ Must contain a video game character",
-    "❌ Must contain exactly 5 letters",
-    "❌ Must contain forbidden energy",
-    "❌ Password lacks aura",
-    "❌ Password must contain a 3",
-    "❌ Password is too weak",
-    "❌ Password is too strong",
-    "❌ Password must contain the letter K",
-    "❌ Password must appease the coding gods",
-    "❌ Password contains suspicious activity",
-    "❌ Password detected by anti-cheese systems",
-    "❌ Password must include an exclamation mark",
-    "❌ Password rejected by quantum security",
-    "❌ Password is emotionally unstable",
-    "❌ Password has too much confidence",
-    "❌ Password not approved by Kirby"
+const randomErrors = [
+    "SYSTEM OVERLOAD: thinking too hard",
+    "FATAL ERROR: password may not exist",
+    "LOG: user is wasting time",
+    "WARNING: logic consistency failure",
+    "SECURITY CORE: confused",
+    "AI MODULE: disagreement detected"
 ];
 
 let currentRequirement = 0;
@@ -199,50 +220,41 @@ function checkPassword() {
     const input = document.getElementById("passwordInput").value;
     const reqBox = document.getElementById("requirements");
 
-    // ONLY WORKING PASSWORD
+    // ONLY VALID PASSWORD
     if (input === "K!RB3") {
 
         document.getElementById("passwordScreen").style.display = "none";
 
-        const loadingScreen = document.getElementById("loadingScreen");
-
-        loadingScreen.style.display = "flex";
+        const loading = document.getElementById("loadingScreen");
+        loading.style.display = "flex";
 
         setTimeout(() => {
             document.getElementById("loadingFill").style.width = "100%";
         }, 100);
 
         setTimeout(() => {
-
-            loadingScreen.innerHTML = `
-                <div class="finalText">
-                    PASSWORD CHECK 2
-                </div>
+            loading.innerHTML = `
+                <h1>PASSWORD CHECK ROUND 2</h1>
+                <p>System escalation in progress...</p>
             `;
-
         }, 3500);
 
         return;
     }
 
-    // Add more fake requirements every submit
+    // Add structured chaos
     if (currentRequirement < requirements.length) {
 
         const p = document.createElement("p");
-
         p.innerText = requirements[currentRequirement];
-
         reqBox.appendChild(p);
-
         currentRequirement++;
 
     } else {
 
-        const randomFail = document.createElement("p");
-
-        randomFail.innerText = "❌ Password rejected for unknown reasons";
-
-        reqBox.appendChild(randomFail);
+        const p = document.createElement("p");
+        p.innerText = randomErrors[Math.floor(Math.random() * randomErrors.length)];
+        reqBox.appendChild(p);
     }
 }
 
@@ -250,4 +262,3 @@ function checkPassword() {
 
 </body>
 </html>
-```
