@@ -1,228 +1,253 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <title>Robosword Codes</title>
-   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
-   <style>
-     body {
-       background: #1c1c1c;
-       font-family: 'Open Sans', sans-serif;
-       margin: 0;
-       padding: 0;
-     }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impossible Password Checker</title>
 
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
 
-     .Navbar {
-       width: 100%;
-       height: 80px;
-       background: linear-gradient(90deg, #111111, #1f1f1f);
-       display: flex;
-       align-items: center;
-       padding-left: 25px;
-       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-       border-bottom: 2px solid #FFAB40;
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: 'Open Sans', sans-serif;
+            overflow: hidden;
+        }
 
-     }
-     .navbuttons{
-       margin-left: auto;
-     margin-right:50px;
-     }
-     .Navbar img {
-       border-radius: 50%;
-       width: 60px;
-       height: 60px;
-       margin-right: 15px;
-     }
-     .Navbar{
-         color: white;
-     }
-     .Navbar h1 {
-       color: #FFAB40;
-       font-size: 28px;
-       font-weight: 700;
-       letter-spacing: 2px;
-       font-family: 'Orbitron', 'Open Sans', sans-serif;
-       margin: 0;
-     }
-     .Navbar button {
- background: linear-gradient(90deg, #222222, #111111);
- color: #FFAB40;
-  padding: 10px 20px;
- border: 1px solid #444;
- border-radius: 25px;
- font-weight: 600;
- text-transform: uppercase;
- font-size: 14px;
- letter-spacing: 0.5px;
- cursor: pointer;
- transition: all 0.3s ease;
- box-shadow: 0 4px 6px rgba(0,0,0,0.3);
- }
-.Navbar a{
- text-decoration: none;
- color: #FFAB40;
-}
+        .passwordScreen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #111, #1f1f1f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
+        .passwordBox {
+            width: 550px;
+            background: #222;
+            border: 2px solid #FFAB40;
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255,171,64,0.3);
+        }
 
-.Navbar button:hover {
- background: linear-gradient(90deg, #333333, #222222);
- border-color: #FFAB40;
+        .passwordBox h1 {
+            color: #FFAB40;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
 
+        .passwordBox input {
+            width: 80%;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            background: #333;
+            color: white;
+        }
 
- transform: translateY(-1px);
-}
+        .passwordBox button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 20px;
+            background: #FFAB40;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
 
+        .passwordBox button:hover {
+            transform: scale(1.05);
+        }
 
-     .newpost {
-       width: 500px;
-       min-height: 200px;
-       background-color: #333333;
-       margin: 20px auto;
-       border-radius: 36px;
-       padding: 20px;
-       overflow: auto;
-       transition: 0.3s ease;
-     }
+        .requirements {
+            margin-top: 25px;
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 20px;
+            max-height: 250px;
+            overflow-y: auto;
+            text-align: left;
+        }
 
+        .requirements p {
+            color: #ff6b6b;
+            margin: 10px 0;
+            font-size: 15px;
+        }
 
-     .newpost:hover {
-       transform: translateY(-5px);
-       box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-     }
+        .loadingScreen {
+            position: fixed;
+            inset: 0;
+            background: black;
+            color: #00ff00;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: monospace;
+            z-index: 9999;
+        }
 
+        .loadingScreen h1 {
+            font-size: 50px;
+            margin-bottom: 30px;
+        }
 
-     .postTitle {
-       color: #FFAB40;
-       font-size: 35px;
-       margin-bottom: 15px;
-     }
+        .loadingBar {
+            width: 450px;
+            height: 30px;
+            border: 2px solid #00ff00;
+        }
 
+        .loadingFill {
+            width: 0%;
+            height: 100%;
+            background: #00ff00;
+            transition: width 3s linear;
+        }
 
-     .postText{
-       color: #E0E0E0;
-       margin: 10px 0;
-       line-height: 1.6;
-     }
+        .finalText {
+            font-size: 50px;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            animation: flicker 1s infinite alternate;
+        }
 
+        @keyframes flicker {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
 
-     .codeBox {
-       overflow: auto;
-       width: 90%;
-       min-height: 80px;
-       padding: 15px;
-       margin: 20px auto 0 auto;
-       font-family: 'Cascadia Mono', monospace;
-       background-color: #0D0D0D;
-       color: #00FF00;
+<body>
 
-       transition: 0.3s ease;
-     }
+<div class="passwordScreen" id="passwordScreen">
 
+    <div class="passwordBox">
 
+        <h1>IMPOSSIBLE PASSWORD CHECKER</h1>
 
+        <input type="text" id="passwordInput" placeholder="Enter password...">
 
+        <br>
 
-     .code p {
-       margin: 0;
-       padding: 0;
-     }
-   </style>
- </head>
- <body>
-   <div class="Navbar">
-     <img src="profilePic.png" alt="Profile Pic">
-     <h1>Robosword Codes</h1>
-     <div class="navbuttons">
-       <a href="projects.html" class="navbtn">projects</a>
-  <a href="index.html" class="navbtn">posts</a>
-   </div>
-   </div>
-  <div class="newpost">
-  <h1 class="postTitle">What we did for the Godot Game Jam</h1>
-   <div class="postText">
-   When the gamejam started, me and my friend(who was the person who found the music and made some of the assets), started to come up with an idea.
-   The theme for this jam was brewing.
-    So we decided to make a game where you would throw potions at enemies, and you would have to kill bosses to get materials to brew a potion.
-    Oh boy, how we were wrong.
-    I really only had 3 days. Saturday, Sunday, and the next Saturday. I could not work on it on the week days. 
-    On day 1, I created a platformer.
-    On day 2, I added the start page, the brewing page.
-    I also added potions and enemies. The enemies were slimes. 
-    In the brewing shop, I added a damage potion, a speed potion, and a health boost potion. 
-    Little did I know that I would only be using 2 of the potions, and the other one would be incomplete.
-    And then came day 3: The next Saturday.
-    I had to finish it this night and submit it, because I could not be online before the submission date.
-    So I changed it all.
-    The player was rushing to save a village becaues 3 worlds collided and a mysterious entity named the void used a power called a glitch to destroy worlds.
-    Was it stupid? Yes
-    Was it rushed? Yes
-    But did we finish? Yes
-    So I did that, and for the level select I put a bunch of text that says stuff like "One level" "one hope" "one chance"
-    To play the game: https://robosword.itch.io/dapotion-master or https://robosword.itch.io/potion-master
-   </div>
-  </div>
-  <div class="newpost"> 
-  <h1 class="postTitle">How I learned Godot in under 48 hours for a game jam</h1>
-   <div class="postText">
-   It all started after I tried to learn Unity in within 2 days. Then I tried to find a game jam. I saw one on itch.io called "Godot Wild Game Jam". I decided that I would join it. I joined 48 hours before the game jam. I made it my mission to finish learning it within 48 hours. To achieve this goal, I started with a Brackey's platformer video. I stopped in the middle of the series because while saving one of the files, I accedently deleted it. The skills that I gained from it includes how to use a tilemap, player movements, physics, the basics of gdscripts, and a little more. 
-   That was the only video which I was able to fully watch before the game jam. After that video, I still had 24 hours left. So, I tried making my own game. Using this I felt a lot more comfortable using godot, but my gdscipt skills were still kinda of bad. So the night before, I studied from the GDScript Api
-   </div>
-   <div class="codeBox">
-   <div class="code">
-    <p>func _ready() -> null: is when the scene is started</p>
-    <p>func _physics_process(delta) -> null: is when you need to update something physically, usually by using move_and_slide()</p>
-    <p>func _process(delta) -> null: is an update function for the sprite</p>
-    <p># I also learned a lot more.</p>
-   </div>
-    <div class="postText">
-    In a few days I will post the next update including what we did for the game jam, and how far we are into it. Stay tuned for more.
-    </div>
-   </div>
-  </div>
-  
-  <div class = "newpost">
- <h1 class="postTitle">My expierience with Unity</h1>
-   <div class="postText">
-    <p>I tried out unity over this week, and I want to share my expierence. I wanted to try to speedrun unity and learn it within 3 days. I started with a unity 3d video, which helped me get through the basics, and I learned some things in Unity3d. Then I tried taking a unity2d tutorial, but I quickly relized that even though unity is usable with 2d applications, it is not that easy. It is clear that Unity is mostly a 3d game engine. 2d mode is also really hard to use for a beginner. I would recommend people to use unity for 3d games, but for 2d, you should use a different game engine, or maybe even use pygame.</p>
-    </div>
-  </div>
-  <div class="newpost">
-  <h1 class="postTitle">My Honest opinion on Java Swing</h1>
-   <div class="postText">
-    <p>So far, I have made 2 Projects using Java swing. A text editor and a library app. Both of them are in my github and on my projects page. Before this, I mainly used python. I would give this a 4/5. Swing was really easy for me to use as a beginner to Java. The problem with Swing howerver, is that it was very hard for me to learn to use Layouts. I did not understand it at all, and I just chose to avoid it completely. In the situations which I had to use the layouts, I ended up having to use google to search everything up. It also does not come with rounded corners built into the buttons, but thats not the most important thing. I would say for a beginner, this would be a really good tool to get started with. If you are new to java, I highly recomment making a project in Swing Java, because it can also help you learn some of the fundamentals and/or file handling in java.</p>
-   </div>
-  </div>
-    <div class="newpost">
-        <h1 class="postTitle">Django vs Flask</h1>
-        <div class="postText">
-            <p>Django and flask are two different libraries made for web development backend. Django comes with everything in it, but is much much more complecated to set up. Flask is really easy to set up, but it doesn't come with everything set up. If you are doing a miniproject or a hackathon, you should choose flask. If you are going to release something into the real world, you should do django. </p>
-            <p>Another thing to consider is routing. In flask, you can route using this</p>
-            <div class="codeBox">
-                <div class="code">
-                    @app.route("/action", methods=["Get", "Post"])
-                </div>
-            </div>
-            <P>In django, you have to create a file specifically for routing, and link it to your view files. This makes it inefficient for small projects and hackathons, because it requires too much time. Setting up is also pretty hard in django, and setting up static files is really easy in flask unlike in django</P>
+        <button onclick="checkPassword()">Submit Password</button>
+
+        <div class="requirements" id="requirements">
+            <p>❌ Must contain a capital letter</p>
         </div>
+
     </div>
-   <div class="newpost">
-     <h1 class="postTitle">Introduction</h1>
-     <div class="postText">
-       <p>Hi! This is my first post. Let's go over some of the basics of how this blog will be layed out. This is the text area. This is where the content of the posts will be.</p>
-     </div>
-     <div class="codeBox">
-       <div class="code">
-         <p># This is the code area.</p>
-         <p># This is where code will be put.</p>
-       </div>
-     </div>
-     <div class="postText">
-     <p>The text in orange are titles. The post section is where you can see my blog and all my posts, and the projects section is where you can see some of my projects. Some topics which I go over include new projects that I do, new tools that come out, comparing frameworks, making games, and more. Hope that yall will enjoy this as much as I will.</p>
-     </div>
-   </div>
- </body>
+
+</div>
+
+<div class="loadingScreen" id="loadingScreen">
+
+    <h1>PASSWORD ACCEPTED</h1>
+
+    <div class="loadingBar">
+        <div class="loadingFill" id="loadingFill"></div>
+    </div>
+
+</div>
+
+<script>
+
+const requirements = [
+
+    "❌ Must contain a number",
+    "❌ Must contain a special character",
+    "❌ Must contain a video game character",
+    "❌ Must contain exactly 5 letters",
+    "❌ Must contain forbidden energy",
+    "❌ Password lacks aura",
+    "❌ Password must contain a 3",
+    "❌ Password is too weak",
+    "❌ Password is too strong",
+    "❌ Password must contain the letter K",
+    "❌ Password must appease the coding gods",
+    "❌ Password contains suspicious activity",
+    "❌ Password detected by anti-cheese systems",
+    "❌ Password must include an exclamation mark",
+    "❌ Password rejected by quantum security",
+    "❌ Password is emotionally unstable",
+    "❌ Password has too much confidence",
+    "❌ Password not approved by Kirby"
+];
+
+let currentRequirement = 0;
+
+function checkPassword() {
+
+    const input = document.getElementById("passwordInput").value;
+    const reqBox = document.getElementById("requirements");
+
+    // ONLY WORKING PASSWORD
+    if (input === "K!RB3") {
+
+        document.getElementById("passwordScreen").style.display = "none";
+
+        const loadingScreen = document.getElementById("loadingScreen");
+
+        loadingScreen.style.display = "flex";
+
+        setTimeout(() => {
+            document.getElementById("loadingFill").style.width = "100%";
+        }, 100);
+
+        setTimeout(() => {
+
+            loadingScreen.innerHTML = `
+                <div class="finalText">
+                    PASSWORD CHECK 2
+                </div>
+            `;
+
+        }, 3500);
+
+        return;
+    }
+
+    // Add more fake requirements every submit
+    if (currentRequirement < requirements.length) {
+
+        const p = document.createElement("p");
+
+        p.innerText = requirements[currentRequirement];
+
+        reqBox.appendChild(p);
+
+        currentRequirement++;
+
+    } else {
+
+        const randomFail = document.createElement("p");
+
+        randomFail.innerText = "❌ Password rejected for unknown reasons";
+
+        reqBox.appendChild(randomFail);
+    }
+}
+
+</script>
+
+</body>
 </html>
-
-
-
+```
